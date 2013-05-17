@@ -66,11 +66,9 @@
     [searchBox addSubview: fldSearch];
     */
     
-    //add search box
-    //[scroller.boxes addObject:searchBox];
-    
-    //fire up the first search
-    [self searchYoutubeVideosForTerm:@""];
+    //prepare up the first search
+    searchBar.showsCancelButton = YES;
+    [searchBar becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -91,7 +89,12 @@
 
 -(void)searchYoutubeVideosForTerm:(NSString*)term
 {
+#ifdef ZDYOUTUBEBROWSER
     NSLog(@"Searching for '%@' ...", term);
+#endif
+    
+    searchBar.showsCancelButton = NO;
+    [searchBar resignFirstResponder];
     
     //URL escape the term
     term = [term stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -103,7 +106,9 @@
                                   completion:^(NSDictionary *json, JSONModelError *err) {
                                       
                                       //got JSON back
+#ifdef ZDYOUTUBEBROWSER
                                       NSLog(@"Got JSON from web: %@", json);
+#endif
                                       
                                       if (err) {
                                           [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -118,8 +123,9 @@
                                       videos = [VideoModel arrayOfModelsFromDictionaries:
                                                 json[@"feed"][@"entry"]
                                                 ];
-                                      
+#ifdef ZDYOUTUBEBROWSER
                                       if (videos) NSLog(@"Loaded successfully models");
+#endif
                                       
                                       //show the videos
                                       [self showVideos];
@@ -130,7 +136,7 @@
 -(void)showVideos
 {
     //clean the old videos
-//    [scroller.boxes removeObjectsInRange:NSMakeRange(1, scroller.boxes.count-1)];
+    [scroller.boxes removeObjectsInRange:NSMakeRange(0, scroller.boxes.count)];
     
     //add boxes for all videos
     for (int i=0;i<videos.count;i++) {
