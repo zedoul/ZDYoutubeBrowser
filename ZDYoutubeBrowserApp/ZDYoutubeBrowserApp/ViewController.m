@@ -21,7 +21,6 @@
 	// Do any additional setup after loading the view, typically from a nib.
     ZDYoutubeBrowser* det = [[ZDYoutubeBrowser alloc]
                              initWithNibName:@"ZDYoutubeBrowser" bundle:nil];
-    assert(det);
     [self.navigationController pushViewController:det animated:NO];
 }
 

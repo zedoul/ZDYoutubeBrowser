@@ -138,7 +138,10 @@
         //create a box
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
         box.onTap = ^{
-            [self performSegueWithIdentifier:@"videoViewSegue" sender:video];
+            WebVideoViewController* det = [[WebVideoViewController alloc]
+                                     initWithNibName:@"WebVideoViewController" bundle:nil];
+            det.video = video;
+            [self.navigationController pushViewController:det animated:NO];
         };
         
         //add the box
