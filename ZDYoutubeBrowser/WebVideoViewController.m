@@ -48,4 +48,14 @@
 
 }
 
+-(IBAction)backBtnClicked:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
+-(IBAction)downBtnClicked:(id)sender
+{
+    
+}
+
 @end

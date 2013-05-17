@@ -13,4 +13,7 @@
 
 @property (weak, nonatomic) VideoModel* video;
 
+-(IBAction)backBtnClicked:(id)sender;
+-(IBAction)downBtnClicked:(id)sender;
+
 @end
