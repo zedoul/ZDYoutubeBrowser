@@ -1,0 +1,6 @@
+[submodule "MGBox2"]
+	path = MGBox2
+	url = https://github.com/sobri909/MGBox2.git
+[submodule "JSONModel"]
+	path = JSONModel
+	url = https://github.com/icanzilb/JSONModel.git
