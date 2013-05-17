@@ -17,7 +17,7 @@
 #import "PhotoBox.h"
 #import "WebVideoViewController.h"
 
-@interface ZDYoutubeBrowser () <UITextFieldDelegate>
+@interface ZDYoutubeBrowser () <UISearchBarDelegate>
 {
     IBOutlet MGScrollView* scroller;
     MGBox* searchBox;
@@ -53,6 +53,7 @@
     searchBox.backgroundColor = [UIColor colorWithWhite:0.5 alpha:1];
     
     //setup the search text field
+    /*
     UITextField* fldSearch = [[UITextField alloc] initWithFrame:CGRectMake(4,4,312,35)];
     fldSearch.borderStyle = UITextBorderStyleRoundedRect;
     fldSearch.backgroundColor = [UIColor whiteColor];
@@ -63,12 +64,13 @@
     fldSearch.clearButtonMode = UITextFieldViewModeAlways;
     fldSearch.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [searchBox addSubview: fldSearch];
+    */
     
     //add search box
-    [scroller.boxes addObject: searchBox];
+    //[scroller.boxes addObject:searchBox];
     
     //fire up the first search
-    [self searchYoutubeVideosForTerm: fldSearch.text];
+    [self searchYoutubeVideosForTerm:@""];
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,12 +80,14 @@
 }
 
 //fire up API search on Enter pressed
+/*
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [self searchYoutubeVideosForTerm:textField.text];
     return YES;
 }
+ */
 
 -(void)searchYoutubeVideosForTerm:(NSString*)term
 {
@@ -126,7 +130,7 @@
 -(void)showVideos
 {
     //clean the old videos
-    [scroller.boxes removeObjectsInRange:NSMakeRange(1, scroller.boxes.count-1)];
+//    [scroller.boxes removeObjectsInRange:NSMakeRange(1, scroller.boxes.count-1)];
     
     //add boxes for all videos
     for (int i=0;i<videos.count;i++) {
@@ -156,6 +160,48 @@
 {
     WebVideoViewController* controller = segue.destinationViewController;
     controller.video = sender;
+}
+
+#pragma mark - UISearchDisplayController Delegate Methods
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+//    self.queryString = [searchText retain];
+//    self.queryStringLabel.text = self.queryString;
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar
+{
+    searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)sBar
+{
+    searchBar.showsCancelButton = NO;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)sBar
+{
+    [self searchYoutubeVideosForTerm:sBar.text];
+    /*
+    if([delegate respondsToSelector:@selector(searchResultViewControllerDidEntered:)]) {
+        [delegate searchResultViewControllerDidEntered:self.queryString];
+    }
+    
+    [self fetchSearchResults];
+    [searchBar resignFirstResponder];
+    [self displayImages:YES];
+    [self.scrollView setNeedsDisplay];
+     */
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)sBar
+{
+    [searchBar resignFirstResponder];
+    searchBar.showsCancelButton =NO;
+    
+    if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
+        [_delegate youtubeBrowserDidClose:self];
+    }
 }
 
 @end

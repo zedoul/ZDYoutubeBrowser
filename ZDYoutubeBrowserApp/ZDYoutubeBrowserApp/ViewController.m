@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "ZDYoutubeBrowser.h"
 
-@interface ViewController ()
+@interface ViewController () <ZDYoutubeBrowserDelegate>
+
+@property (nonatomic, retain) ZDYoutubeBrowser* browser;
 
 @end
 
@@ -19,15 +21,29 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    ZDYoutubeBrowser* det = [[ZDYoutubeBrowser alloc]
+    _browser = [[ZDYoutubeBrowser alloc]
                              initWithNibName:@"ZDYoutubeBrowser" bundle:nil];
-    [self.navigationController pushViewController:det animated:NO];
+    _browser.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - 
+
+-(IBAction)openBtnClicked:(id)sender
+{
+    [self.navigationController pushViewController:_browser animated:NO];
+}
+
+#pragma mark - 
+
+-(void)youtubeBrowserDidClose:(ZDYoutubeBrowser*)browser
+{
+    [self.navigationController popToViewController:self animated:NO];
 }
 
 @end
