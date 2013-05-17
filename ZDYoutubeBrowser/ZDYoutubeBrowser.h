@@ -23,7 +23,7 @@
 @required
 @optional
 
--(void)youtubeBrowser:(ZDYoutubeBrowser*)browser downTarget:(NSString*)keyID;
+-(void)youtubeBrowser:(ZDYoutubeBrowser*)browser target:(NSString*)keyID;
 -(void)youtubeBrowserDidClose:(ZDYoutubeBrowser*)browser;
 
 @end

@@ -17,7 +17,7 @@
 #import "PhotoBox.h"
 #import "WebVideoViewController.h"
 
-@interface ZDYoutubeBrowser () <UISearchBarDelegate>
+@interface ZDYoutubeBrowser () <UISearchBarDelegate,WebVideoViewControllerDelegate>
 {
     IBOutlet MGScrollView* scroller;
     MGBox* searchBox;
@@ -151,6 +151,7 @@
             WebVideoViewController* det = [[WebVideoViewController alloc]
                                      initWithNibName:@"WebVideoViewController" bundle:nil];
             det.video = video;
+            det.delegate = self;
             [self.navigationController pushViewController:det animated:NO];
         };
         
@@ -169,6 +170,7 @@
 }
 
 #pragma mark - UISearchDisplayController Delegate Methods
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
 //    self.queryString = [searchText retain];
@@ -207,6 +209,15 @@
     
     if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
         [_delegate youtubeBrowserDidClose:self];
+    }
+}
+
+#pragma mark - 
+
+-(void)webVideo:(WebVideoViewController*)controller target:(NSString*)keyID
+{
+    if([_delegate respondsToSelector:@selector(youtubeBrowser:target:)]) {
+        [_delegate youtubeBrowser:self target:keyID];
     }
 }
 

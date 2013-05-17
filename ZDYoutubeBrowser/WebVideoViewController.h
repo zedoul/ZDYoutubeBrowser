@@ -9,11 +9,24 @@
 #import <UIKit/UIKit.h>
 #import "VideoModel.h"
 
+@protocol WebVideoViewControllerDelegate;
+
 @interface WebVideoViewController : UIViewController
 
 @property (weak, nonatomic) VideoModel* video;
 
+@property (nonatomic,assign) id <WebVideoViewControllerDelegate> delegate;
+
 -(IBAction)backBtnClicked:(id)sender;
 -(IBAction)downBtnClicked:(id)sender;
+
+@end
+
+@protocol WebVideoViewControllerDelegate <NSObject>
+
+@required
+-(void)webVideo:(WebVideoViewController*)controller target:(NSString*)keyID;
+
+@optional
 
 @end

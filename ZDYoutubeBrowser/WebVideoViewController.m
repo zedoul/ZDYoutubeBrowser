@@ -13,7 +13,7 @@
     IBOutlet UIWebView* webView;
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(NSString*)videoID
 {
     VideoLink* link = self.video.link[0];
     
@@ -29,6 +29,17 @@
     
     if (!videoId) {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Video ID not found in video URL" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil]show];
+        return nil;
+    }
+    
+    return videoId;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSString* videoId = [self videoID];
+    
+    if (nil == videoId) {
         return;
     }
     
@@ -55,7 +66,15 @@
 
 -(IBAction)downBtnClicked:(id)sender
 {
+    NSString* videoId = [self videoID];
     
+    if (nil == videoId) {
+        return;
+    }
+    
+    if([_delegate respondsToSelector:@selector(webVideo:target:)]) {
+        [_delegate webVideo:self target:videoId];
+    }
 }
 
 @end
