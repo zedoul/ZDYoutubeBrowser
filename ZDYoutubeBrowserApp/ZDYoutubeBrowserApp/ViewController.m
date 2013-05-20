@@ -32,14 +32,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 
+#pragma mark - IBAction
 
 -(IBAction)openBtnClicked:(id)sender
 {
     [self.navigationController pushViewController:_browser animated:NO];
 }
 
-#pragma mark - 
+#pragma mark - ZDYoutubeDelegate
+
+-(void)youtubeBrowser:(ZDYoutubeBrowser*)browser select:(NSString*)keyID
+{
+    NSLog(@"Selected ID [%@]",keyID);
+}
 
 -(void)youtubeBrowserDidClose:(ZDYoutubeBrowser*)browser
 {

@@ -51,9 +51,7 @@
 		7C7532FE1745C9E400CF6E09 /* VideoLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7532F91745C9E400CF6E09 /* VideoLink.m */; };
 		7C7532FF1745C9E400CF6E09 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7532FB1745C9E400CF6E09 /* VideoModel.m */; };
 		7C7533021745CA0C00CF6E09 /* ZDYoutubeBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */; };
-		7C7533051745CA7100CF6E09 /* WebVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7533041745CA7100CF6E09 /* WebVideoViewController.m */; };
 		7C7533071745CAEA00CF6E09 /* ZDYoutubeBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */; };
-		7C7533091745CB6500CF6E09 /* WebVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7533081745CB6500CF6E09 /* WebVideoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -140,10 +138,7 @@
 		7C7532FB1745C9E400CF6E09 /* VideoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModel.m; sourceTree = "<group>"; };
 		7C7533001745CA0C00CF6E09 /* ZDYoutubeBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDYoutubeBrowser.h; sourceTree = "<group>"; };
 		7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDYoutubeBrowser.m; sourceTree = "<group>"; };
-		7C7533031745CA7100CF6E09 /* WebVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebVideoViewController.h; sourceTree = "<group>"; };
-		7C7533041745CA7100CF6E09 /* WebVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebVideoViewController.m; sourceTree = "<group>"; };
 		7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZDYoutubeBrowser.xib; sourceTree = "<group>"; };
-		7C7533081745CB6500CF6E09 /* WebVideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebVideoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,9 +333,6 @@
 				7C7533001745CA0C00CF6E09 /* ZDYoutubeBrowser.h */,
 				7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */,
 				7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */,
-				7C7533031745CA7100CF6E09 /* WebVideoViewController.h */,
-				7C7533041745CA7100CF6E09 /* WebVideoViewController.m */,
-				7C7533081745CB6500CF6E09 /* WebVideoViewController.xib */,
 				7C7532F41745C9E400CF6E09 /* MediaThumbnail.h */,
 				7C7532F51745C9E400CF6E09 /* MediaThumbnail.m */,
 				7C7532F61745C9E400CF6E09 /* PhotoBox.h */,
@@ -411,7 +403,6 @@
 				7C75328B1745C91000CF6E09 /* Default-568h@2x.png in Resources */,
 				7C75328E1745C91000CF6E09 /* MainStoryboard.storyboard in Resources */,
 				7C7533071745CAEA00CF6E09 /* ZDYoutubeBrowser.xib in Resources */,
-				7C7533091745CB6500CF6E09 /* WebVideoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +447,6 @@
 				7C7532FE1745C9E400CF6E09 /* VideoLink.m in Sources */,
 				7C7532FF1745C9E400CF6E09 /* VideoModel.m in Sources */,
 				7C7533021745CA0C00CF6E09 /* ZDYoutubeBrowser.m in Sources */,
-				7C7533051745CA7100CF6E09 /* WebVideoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
