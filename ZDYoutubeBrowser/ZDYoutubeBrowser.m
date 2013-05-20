@@ -43,27 +43,13 @@
 	// Do any additional setup after loading the view.
     
     //setup the scroll view
-    scroller.contentLayoutMode = MGLayoutGridStyle;
+    scroller.contentLayoutMode = MGLayoutTableStyle;
     scroller.bottomPadding = 8;
     scroller.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
     
     //setup the search box
     searchBox = [MGBox boxWithSize:CGSizeMake(320,44)];
     searchBox.backgroundColor = [UIColor colorWithWhite:0.5 alpha:1];
-    
-    //setup the search text field
-    /*
-    UITextField* fldSearch = [[UITextField alloc] initWithFrame:CGRectMake(4,4,312,35)];
-    fldSearch.borderStyle = UITextBorderStyleRoundedRect;
-    fldSearch.backgroundColor = [UIColor whiteColor];
-    fldSearch.font = [UIFont systemFontOfSize:24];
-    fldSearch.delegate = self;
-    fldSearch.placeholder = @"Search YouTube...";
-    fldSearch.text = @"";
-    fldSearch.clearButtonMode = UITextFieldViewModeAlways;
-    fldSearch.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    [searchBox addSubview: fldSearch];
-    */
     
     //prepare up the first search
     searchBar.showsCancelButton = YES;
@@ -75,16 +61,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//fire up API search on Enter pressed
-/*
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    [self searchYoutubeVideosForTerm:textField.text];
-    return YES;
-}
- */
 
 -(void)searchYoutubeVideosForTerm:(NSString*)term
 {
@@ -173,6 +149,7 @@
                 [_delegate youtubeBrowser:self select:[self youtubeID:video]];
             }
         };
+        [box setFrame:CGRectMake(0, 0, 300, 100)];
         
         //add the box
         [scroller.boxes addObject:box];
@@ -203,16 +180,6 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)sBar
 {
     [self searchYoutubeVideosForTerm:sBar.text];
-    /*
-    if([delegate respondsToSelector:@selector(searchResultViewControllerDidEntered:)]) {
-        [delegate searchResultViewControllerDidEntered:self.queryString];
-    }
-    
-    [self fetchSearchResults];
-    [searchBar resignFirstResponder];
-    [self displayImages:YES];
-    [self.scrollView setNeedsDisplay];
-     */
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)sBar

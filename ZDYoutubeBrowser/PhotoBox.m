@@ -82,7 +82,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [self addSubview:imageView];
 
-    imageView.size = self.size;
+    [imageView setFrame:CGRectMake(0, 0, self.size.height, self.size.height)];
     imageView.alpha = 0;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
     | UIViewAutoresizingFlexibleHeight;
@@ -92,21 +92,26 @@
     imageView.alpha = 1;
     }];
 
-
-    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,self.frame.size.width,20)];
+    UITextView* label = [[UITextView alloc]
+                           initWithFrame:CGRectMake(100,
+                                                    0,
+                                                    self.frame.size.width-100,
+                                                    self.frame.size.height)];
     label.backgroundColor = [UIColor clearColor];
+    label.editable = NO;
+    label.userInteractionEnabled = NO;
     label.text = self.titleString;
     label.font = [UIFont boldSystemFontOfSize:16.0];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     [self addSubview:label];
-
+/*
     label.layer.shadowColor = [UIColor colorWithWhite:0.12 alpha:1].CGColor;
     label.layer.shadowOffset = CGSizeMake(0, 0.5);
     label.layer.shadowRadius = 1;
     label.layer.shadowOpacity = 1;
     label.layer.rasterizationScale = 1.0;
     label.layer.shouldRasterize = YES;
-
+*/
   });
 }
 
