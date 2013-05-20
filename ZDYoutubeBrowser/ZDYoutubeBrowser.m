@@ -15,9 +15,8 @@
 #import "VideoModel.h"
 
 #import "PhotoBox.h"
-#import "WebVideoViewController.h"
 
-@interface ZDYoutubeBrowser () <UISearchBarDelegate,WebVideoViewControllerDelegate>
+@interface ZDYoutubeBrowser () <UISearchBarDelegate>
 {
     IBOutlet MGScrollView* scroller;
     MGBox* searchBox;
@@ -133,6 +132,28 @@
                                   }];
 }
 
+-(NSString*)youtubeID:(VideoModel*)video
+{
+    VideoLink* link = video.link[0];
+    
+    NSString* videoId = nil;
+    NSArray *queryComponents = [link.href.query componentsSeparatedByString:@"&"];
+    for (NSString* pair in queryComponents) {
+        NSArray* pairComponents = [pair componentsSeparatedByString:@"="];
+        if ([pairComponents[0] isEqualToString:@"v"]) {
+            videoId = pairComponents[1];
+            break;
+        }
+    }
+    
+    if (!videoId) {
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Video ID not found in video URL" delegate:nil cancelButtonTitle:@"Close" otherButtonTitles: nil]show];
+        return nil;
+    }
+    
+    return videoId;
+}
+
 -(void)showVideos
 {
     //clean the old videos
@@ -148,11 +169,9 @@
         //create a box
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
         box.onTap = ^{
-            WebVideoViewController* det = [[WebVideoViewController alloc]
-                                     initWithNibName:@"WebVideoViewController" bundle:nil];
-            det.video = video;
-            det.delegate = self;
-            [self.navigationController pushViewController:det animated:NO];
+            if([_delegate respondsToSelector:@selector(youtubeBrowser:select:)]) {
+                [_delegate youtubeBrowser:self select:[self youtubeID:video]];
+            }
         };
         
         //add the box
@@ -161,12 +180,6 @@
     
     //re-layout the scroll view
     [scroller layoutWithSpeed:0.3 completion:nil];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    WebVideoViewController* controller = segue.destinationViewController;
-    controller.video = sender;
 }
 
 #pragma mark - UISearchDisplayController Delegate Methods
@@ -209,15 +222,6 @@
     
     if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
         [_delegate youtubeBrowserDidClose:self];
-    }
-}
-
-#pragma mark - 
-
--(void)webVideo:(WebVideoViewController*)controller target:(NSString*)keyID
-{
-    if([_delegate respondsToSelector:@selector(youtubeBrowser:target:)]) {
-        [_delegate youtubeBrowser:self target:keyID];
     }
 }
 
