@@ -52,7 +52,8 @@
     searchBox.backgroundColor = [UIColor colorWithWhite:0.5 alpha:1];
     
     //prepare up the first search
-    searchBar.showsCancelButton = YES;
+    searchBar.showsCancelButton = NO;
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"Youtube_SearchBar"]];
     [searchBar becomeFirstResponder];
 }
 
@@ -146,11 +147,13 @@
         box.delegate = self;
         box->video = video;
         box.onTap = ^{
-            if([_delegate respondsToSelector:@selector(youtubeBrowser:select:)]) {
-                [_delegate youtubeBrowser:self select:[self youtubeID:video]];
+            if([_delegate respondsToSelector:@selector(youtubeBrowser:select:title:)]) {
+                [_delegate youtubeBrowser:self
+                                   select:[self youtubeID:video]
+                                    title:video.title];
             }
         };
-        [box setFrame:CGRectMake(0, 0, 300, 88)];
+        [box setFrame:CGRectMake(0, 0, 305, 88)];
         
         //add the box
         [scroller.boxes addObject:box];
@@ -180,7 +183,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar
 {
-    searchBar.showsCancelButton = YES;
+    searchBar.showsCancelButton = NO;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)sBar

@@ -83,7 +83,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [self addSubview:imageView];
 
-    [imageView setFrame:CGRectMake(0, 0, self.size.height, self.size.height)];
+    [imageView setFrame:CGRectMake(10, 10, self.size.height-20, self.size.height-20)];
     imageView.alpha = 0;
     imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
     | UIViewAutoresizingFlexibleHeight;

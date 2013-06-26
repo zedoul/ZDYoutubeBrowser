@@ -24,7 +24,7 @@
 @protocol ZDYoutubeBrowserDelegate <NSObject>
 @required
 @optional
--(void)youtubeBrowser:(ZDYoutubeBrowser*)browser select:(NSString*)keyID;
+-(void)youtubeBrowser:(ZDYoutubeBrowser*)browser select:(NSString*)keyID title:(NSString*)title;
 -(void)youtubeBrowser:(ZDYoutubeBrowser*)browser down:(NSString*)keyID;
 -(void)youtubeBrowserDidClose:(ZDYoutubeBrowser*)browser;
 @end
