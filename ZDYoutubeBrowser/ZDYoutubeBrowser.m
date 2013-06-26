@@ -16,7 +16,7 @@
 
 #import "PhotoBox.h"
 
-@interface ZDYoutubeBrowser () <UISearchBarDelegate>
+@interface ZDYoutubeBrowser () <UISearchBarDelegate,PhotoBoxDelegate>
 {
     IBOutlet MGScrollView* scroller;
     MGBox* searchBox;
@@ -137,19 +137,20 @@
     
     //add boxes for all videos
     for (int i=0;i<videos.count;i++) {
-        
         //get the data
         VideoModel* video = videos[i];
         MediaThumbnail* thumb = video.thumbnail[0];
         
         //create a box
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
+        box.delegate = self;
+        box->video = video;
         box.onTap = ^{
             if([_delegate respondsToSelector:@selector(youtubeBrowser:select:)]) {
                 [_delegate youtubeBrowser:self select:[self youtubeID:video]];
             }
         };
-        [box setFrame:CGRectMake(0, 0, 300, 100)];
+        [box setFrame:CGRectMake(0, 0, 300, 88)];
         
         //add the box
         [scroller.boxes addObject:box];
@@ -157,6 +158,16 @@
     
     //re-layout the scroll view
     [scroller layoutWithSpeed:0.3 completion:nil];
+}
+
+-(IBAction)closeBtnClicked:(id)sender
+{
+    [searchBar resignFirstResponder];
+    searchBar.showsCancelButton =NO;
+    
+    if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
+        [_delegate youtubeBrowserDidClose:self];
+    }
 }
 
 #pragma mark - UISearchDisplayController Delegate Methods
@@ -184,11 +195,15 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)sBar
 {
-    [searchBar resignFirstResponder];
-    searchBar.showsCancelButton =NO;
-    
-    if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
-        [_delegate youtubeBrowserDidClose:self];
+    [self closeBtnClicked:nil];
+}
+
+#pragma mark - 
+
+-(void)photoBox:(PhotoBox*)box down:(VideoModel*)video
+{
+    if([_delegate respondsToSelector:@selector(youtubeBrowser:down:)]) {
+        [_delegate youtubeBrowser:self down:[self youtubeID:video]];
     }
 }
 

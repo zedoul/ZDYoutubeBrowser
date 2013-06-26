@@ -15,7 +15,8 @@
   self.leftMargin = 8;
 
   // background
-  self.backgroundColor = [UIColor colorWithRed:0.94 green:0.94 blue:0.95 alpha:1];
+  self.backgroundColor = [UIColor blackColor];
+    //[UIColor colorWithRed:0.94 green:0.94 blue:0.95 alpha:1];
 
   // shadow
   self.layer.shadowColor = [UIColor colorWithWhite:0.12 alpha:1].CGColor;
@@ -93,26 +94,33 @@
     }];
 
     UITextView* label = [[UITextView alloc]
-                           initWithFrame:CGRectMake(100,
-                                                    0,
-                                                    self.frame.size.width-100,
-                                                    self.frame.size.height)];
-    label.backgroundColor = [UIColor clearColor];
-    label.editable = NO;
-    label.userInteractionEnabled = NO;
-    label.text = self.titleString;
-    label.font = [UIFont boldSystemFontOfSize:16.0];
-    label.textColor = [UIColor blackColor];
-    [self addSubview:label];
-/*
-    label.layer.shadowColor = [UIColor colorWithWhite:0.12 alpha:1].CGColor;
-    label.layer.shadowOffset = CGSizeMake(0, 0.5);
-    label.layer.shadowRadius = 1;
-    label.layer.shadowOpacity = 1;
-    label.layer.rasterizationScale = 1.0;
-    label.layer.shouldRasterize = YES;
-*/
+                           initWithFrame:CGRectMake(91,
+                                                    11,
+                                                    168,
+                                                    60)];
+      label.backgroundColor = [UIColor clearColor];
+      label.editable = NO;
+      label.userInteractionEnabled = NO;
+      label.text = self.titleString;
+      label.font = [UIFont fontWithName:@"HelveticaNeue-Regular" size:15.0];
+      label.textColor = [UIColor whiteColor];
+      [self addSubview:label];
+      
+      UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+      [button setImage:[UIImage imageNamed:@"Button_Down"] forState:UIControlStateNormal];
+      [button addTarget:self
+                 action:@selector(downBtnClicked:)
+       forControlEvents:UIControlEventTouchDown];
+      button.frame = CGRectMake(260.0, 0.0, 40.0, 88.0);
+      [self addSubview:button];
   });
+}
+
+-(void)downBtnClicked:(id)sender
+{
+    if([_delegate respondsToSelector:@selector(photoBox:down:)]) {
+        [_delegate photoBox:self down:self->video];
+    }
 }
 
 @end
