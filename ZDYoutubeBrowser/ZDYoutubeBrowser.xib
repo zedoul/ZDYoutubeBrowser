@@ -47,6 +47,7 @@
 								<int key="NSvFlags">1316</int>
 								<string key="NSFrame">{{10, 13}, {22, 27}}</string>
 								<reference key="NSSuperview" ref="945060128"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="308782560"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -83,8 +84,9 @@
 							<object class="IBUILabel" id="308782560">
 								<reference key="NSNextResponder" ref="945060128"/>
 								<int key="NSvFlags">1316</int>
-								<string key="NSFrame">{{74, 16}, {177, 20}}</string>
+								<string key="NSFrame">{{74, 10}, {177, 30}}</string>
 								<reference key="NSSuperview" ref="945060128"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="980764602"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -119,6 +121,7 @@
 						</array>
 						<string key="NSFrameSize">{320, 50}</string>
 						<reference key="NSSuperview" ref="316629000"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="113623421"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -132,6 +135,7 @@
 						<int key="NSvFlags">1314</int>
 						<string key="NSFrame">{{0, 50}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="316629000"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="728951271"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="IBUIContentMode">3</int>
@@ -153,6 +157,8 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{0, 94}, {320, 366}}</string>
 						<reference key="NSSuperview" ref="316629000"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -161,6 +167,7 @@
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="945060128"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -303,7 +310,51 @@
 			<nil key="sourceID"/>
 			<int key="maxID">50</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">MGScrollView</string>
+					<string key="superclassName">UIScrollView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/MGScrollView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ZDYoutubeBrowser</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">closeBtnClicked:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">closeBtnClicked:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">closeBtnClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="scroller">MGScrollView</string>
+						<string key="searchBar">UISearchBar</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="scroller">
+							<string key="name">scroller</string>
+							<string key="candidateClassName">MGScrollView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ZDYoutubeBrowser.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
