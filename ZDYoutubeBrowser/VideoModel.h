@@ -14,6 +14,10 @@
 @interface VideoModel : JSONModel
 
 @property (strong, nonatomic) NSString* title;
+@property (strong, nonatomic) NSString* viewCount;
+@property (strong, nonatomic) NSArray* author;
+@property (strong, nonatomic) NSString* updated;
+@property (strong, nonatomic) NSDictionary* seconds;
 @property (strong, nonatomic) NSArray<VideoLink>* link;
 @property (strong, nonatomic) NSArray<MediaThumbnail>* thumbnail;
 

@@ -143,6 +143,8 @@
         MediaThumbnail* thumb = video.thumbnail[0];
         
         //create a box
+        NSLog(@"title [%@]", video.title);
+        NSLog(@"seconds [%@]", video.seconds);
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
         box.delegate = self;
         box->video = video;

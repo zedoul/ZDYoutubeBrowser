@@ -17,14 +17,6 @@
   // background
   self.backgroundColor = [UIColor blackColor];
     //[UIColor colorWithRed:0.94 green:0.94 blue:0.95 alpha:1];
-
-  // shadow
-  self.layer.shadowColor = [UIColor colorWithWhite:0.12 alpha:1].CGColor;
-  self.layer.shadowOffset = CGSizeMake(0, 0.5);
-  self.layer.shadowRadius = 1;
-  self.layer.shadowOpacity = 1;
-  self.layer.rasterizationScale = 1.0;
-  self.layer.shouldRasterize = YES;
 }
 
 #pragma mark - Factories
@@ -60,60 +52,128 @@
 #pragma mark - Photo box loading
 - (void)loadPhotoFromURL:(NSURL*)url
 {
+    
+    // fetch the remote photo
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+    // do UI stuff back in UI land
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        // ditch the spinner
+        UIActivityIndicatorView *spinner = self.subviews.lastObject;
+        [spinner stopAnimating];
+        [spinner removeFromSuperview];
+        
+        // failed to get the photo?
+        if (!data) {
+            self.alpha = 0.3;
+            return;
+        }
+        
+        // got the photo, so lets show it
+        UIImage *image = [UIImage imageWithData:data];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self addSubview:imageView];
+        
+        [imageView setFrame:CGRectMake(10, 10, self.size.height-20, self.size.height-20)];
+        imageView.alpha = 0;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
+        | UIViewAutoresizingFlexibleHeight;
+        
+        // fade the image in
+        [UIView animateWithDuration:0.2 animations:^{
+            imageView.alpha = 1;
+        }];
+        
+        actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [actionButton setImage:[UIImage imageNamed:@"Button_Down"]
+                      forState:UIControlStateNormal];
+        [actionButton addTarget:self
+                         action:@selector(downBtnClicked:)
+               forControlEvents:UIControlEventTouchDown];
+        actionButton.frame = CGRectMake(240.0, 0.0, 60.0, 88.0);
+        [self addSubview:actionButton];
+        
+        UILabel* desclabel = [[UILabel alloc]
+                             initWithFrame:CGRectMake(91,
+                                                      11,
+                                                      168,
+                                                      34)];
+        desclabel.backgroundColor = [UIColor clearColor];
+        //desclabel.editable = NO;
+        desclabel.lineBreakMode = NSLineBreakByWordWrapping;
+        desclabel.numberOfLines = 10;
+        desclabel.userInteractionEnabled = NO;
+        desclabel.text = self.titleString;
+        desclabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+        desclabel.textColor = [UIColor whiteColor];
+        [self addSubview:desclabel];
+        
+        UILabel *updatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
+                                                                         70,
+                                                                         80,
+                                                                         10)];
+        updatedLabel.backgroundColor = [UIColor clearColor];
+        updatedLabel.userInteractionEnabled = NO;
+        updatedLabel.numberOfLines = 1;
+        updatedLabel.adjustsFontSizeToFitWidth = YES;
+        updatedLabel.text = [[video.author[0] objectForKey:@"name"] objectForKey:@"$t"];
+        updatedLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        updatedLabel.textColor = [UIColor whiteColor];
 
-  // fetch the remote photo
-  NSData *data = [NSData dataWithContentsOfURL:url];
-
-  // do UI stuff back in UI land
-  dispatch_async(dispatch_get_main_queue(), ^{
-
-    // ditch the spinner
-    UIActivityIndicatorView *spinner = self.subviews.lastObject;
-    [spinner stopAnimating];
-    [spinner removeFromSuperview];
-
-    // failed to get the photo?
-    if (!data) {
-    self.alpha = 0.3;
-    return;
-    }
-
-    // got the photo, so lets show it
-    UIImage *image = [UIImage imageWithData:data];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    [self addSubview:imageView];
-
-    [imageView setFrame:CGRectMake(10, 10, self.size.height-20, self.size.height-20)];
-    imageView.alpha = 0;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth
-    | UIViewAutoresizingFlexibleHeight;
-
-    // fade the image in
-    [UIView animateWithDuration:0.2 animations:^{
-    imageView.alpha = 1;
-    }];
-
-    UITextView* label = [[UITextView alloc]
-                           initWithFrame:CGRectMake(91,
-                                                    11,
-                                                    168,
-                                                    60)];
-      label.backgroundColor = [UIColor clearColor];
-      label.editable = NO;
-      label.userInteractionEnabled = NO;
-      label.text = self.titleString;
-      label.font = [UIFont fontWithName:@"HelveticaNeue-Regular" size:15.0];
-      label.textColor = [UIColor whiteColor];
-      [self addSubview:label];
-      
-      UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-      [button setImage:[UIImage imageNamed:@"Button_Down"] forState:UIControlStateNormal];
-      [button addTarget:self
-                 action:@selector(downBtnClicked:)
-       forControlEvents:UIControlEventTouchDown];
-      button.frame = CGRectMake(260.0, 0.0, 40.0, 88.0);
-      [self addSubview:button];
-  });
+        [self addSubview:updatedLabel];
+        
+        
+        UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
+                                                                         55,
+                                                                         90,
+                                                                         10)];
+        authorLabel.textColor = [UIColor whiteColor];
+        authorLabel.numberOfLines = 1;
+        NSArray* t = [video.updated componentsSeparatedByString:@"T"];
+        authorLabel.backgroundColor = [UIColor blackColor];
+        authorLabel.adjustsFontSizeToFitWidth = YES;
+        authorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        authorLabel.text = t[0];////video.updated;
+        [self addSubview:authorLabel];
+        
+        UILabel *secondsLabel = [[UILabel alloc] initWithFrame:CGRectMake(91,
+                                                                         70,
+                                                                         90,
+                                                                         10)];
+        secondsLabel.textColor = [UIColor whiteColor];
+        secondsLabel.numberOfLines = 1;
+        secondsLabel.adjustsFontSizeToFitWidth = NO;
+        secondsLabel.backgroundColor = [UIColor blackColor];
+        secondsLabel.adjustsFontSizeToFitWidth = YES;
+        secondsLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        NSDate *timerDate = [NSDate dateWithTimeIntervalSince1970:
+                             [[video.seconds objectForKey:@"seconds"] integerValue]-1];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+        NSDateComponents *components = [calendar components:NSUIntegerMax
+                                                   fromDate:timerDate];
+        secondsLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d",
+                             [components hour],
+                             [components minute],
+                             [components second]];
+        [self addSubview:secondsLabel];
+        
+        UILabel *viewLabel = [[UILabel alloc] initWithFrame:CGRectMake(91,
+                                                                          55,
+                                                                          70,
+                                                                          10)];
+        viewLabel.textColor = [UIColor whiteColor];
+        viewLabel.numberOfLines = 1;
+        viewLabel.adjustsFontSizeToFitWidth = YES;
+        viewLabel.adjustsFontSizeToFitWidth = YES;
+        viewLabel.backgroundColor = [UIColor blackColor];
+        viewLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        //NSLog(@"det [%d]",[[video.viewCount] integerValue]);
+        viewLabel.text = [NSString stringWithFormat:@"%@ views", video.viewCount];
+        [self addSubview:viewLabel];
+    });
 }
 
 -(void)downBtnClicked:(id)sender

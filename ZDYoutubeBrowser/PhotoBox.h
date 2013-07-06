@@ -10,6 +10,7 @@
 @interface PhotoBox : MGBox
 {
     @public
+    UIButton* actionButton;
     VideoModel* video;
 }
 
