@@ -86,15 +86,6 @@
             imageView.alpha = 1;
         }];
         
-        actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [actionButton setImage:[UIImage imageNamed:@"Button_Down"]
-                      forState:UIControlStateNormal];
-        [actionButton addTarget:self
-                         action:@selector(downBtnClicked:)
-               forControlEvents:UIControlEventTouchDown];
-        actionButton.frame = CGRectMake(240.0, 0.0, 60.0, 88.0);
-        [self addSubview:actionButton];
-        
         UILabel* desclabel = [[UILabel alloc]
                              initWithFrame:CGRectMake(91,
                                                       11,
@@ -112,7 +103,7 @@
         
         UILabel *updatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
                                                                          70,
-                                                                         80,
+                                                                         60,
                                                                          10)];
         updatedLabel.backgroundColor = [UIColor clearColor];
         updatedLabel.userInteractionEnabled = NO;
@@ -173,6 +164,16 @@
         //NSLog(@"det [%d]",[[video.viewCount] integerValue]);
         viewLabel.text = [NSString stringWithFormat:@"%@ views", video.viewCount];
         [self addSubview:viewLabel];
+        
+        
+        actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [actionButton setImage:[UIImage imageNamed:@"Button_Down"]
+                      forState:UIControlStateNormal];
+        [actionButton addTarget:self
+                         action:@selector(downBtnClicked:)
+               forControlEvents:UIControlEventTouchDown];
+        actionButton.frame = CGRectMake(240.0, 0.0, 60.0, 88.0);
+        [self addSubview:actionButton];
     });
 }
 

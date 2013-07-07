@@ -100,11 +100,15 @@
                                                 json[@"feed"][@"entry"]
                                                 ];
 #ifdef ZDYOUTUBEBROWSER
-                                      if (videos) NSLog(@"Loaded successfully models");
+                                      if (videos) {
+                                          NSLog(@"Loaded successfully models");
+                                          [self showVideos];
+                                      } else {
+                                          //assert(0);
+                                      }
 #endif
                                       
                                       //show the videos
-                                      [self showVideos];
                                       
                                   }];
 }
