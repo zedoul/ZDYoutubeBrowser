@@ -89,7 +89,7 @@
         UILabel* desclabel = [[UILabel alloc]
                              initWithFrame:CGRectMake(91,
                                                       11,
-                                                      168,
+                                                      158,
                                                       34)];
         desclabel.backgroundColor = [UIColor clearColor];
         //desclabel.editable = NO;
@@ -101,33 +101,33 @@
         desclabel.textColor = [UIColor whiteColor];
         [self addSubview:desclabel];
         
-        UILabel *updatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
                                                                          70,
                                                                          60,
                                                                          10)];
-        updatedLabel.backgroundColor = [UIColor clearColor];
-        updatedLabel.userInteractionEnabled = NO;
-        updatedLabel.numberOfLines = 1;
-        updatedLabel.adjustsFontSizeToFitWidth = YES;
-        updatedLabel.text = [[video.author[0] objectForKey:@"name"] objectForKey:@"$t"];
-        updatedLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
-        updatedLabel.textColor = [UIColor whiteColor];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        nameLabel.userInteractionEnabled = NO;
+        nameLabel.numberOfLines = 1;
+        nameLabel.adjustsFontSizeToFitWidth = YES;
+        nameLabel.text = [[video.author[0] objectForKey:@"name"] objectForKey:@"$t"];
+        nameLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        nameLabel.textColor = [UIColor whiteColor];
 
-        [self addSubview:updatedLabel];
+        [self addSubview:nameLabel];
         
         
-        UILabel *authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
+        UILabel *updatedLabel = [[UILabel alloc] initWithFrame:CGRectMake(186,
                                                                          55,
                                                                          90,
                                                                          10)];
-        authorLabel.textColor = [UIColor whiteColor];
-        authorLabel.numberOfLines = 1;
+        updatedLabel.textColor = [UIColor whiteColor];
+        updatedLabel.numberOfLines = 1;
         NSArray* t = [video.updated componentsSeparatedByString:@"T"];
-        authorLabel.backgroundColor = [UIColor blackColor];
-        authorLabel.adjustsFontSizeToFitWidth = YES;
-        authorLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
-        authorLabel.text = t[0];////video.updated;
-        [self addSubview:authorLabel];
+        updatedLabel.backgroundColor = [UIColor blackColor];
+        updatedLabel.adjustsFontSizeToFitWidth = YES;
+        updatedLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
+        updatedLabel.text = t[0];////video.updated;
+        [self addSubview:updatedLabel];
         
         UILabel *secondsLabel = [[UILabel alloc] initWithFrame:CGRectMake(91,
                                                                          70,

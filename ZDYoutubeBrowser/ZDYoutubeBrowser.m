@@ -99,17 +99,16 @@
                                       videos = [VideoModel arrayOfModelsFromDictionaries:
                                                 json[@"feed"][@"entry"]
                                                 ];
-#ifdef ZDYOUTUBEBROWSER
                                       if (videos) {
-                                          NSLog(@"Loaded successfully models");
+                                          //show the videos
                                           [self showVideos];
                                       } else {
-                                          //assert(0);
+                                          [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                                      message:@"Please try different keywords or try again later"
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"Close"
+                                                            otherButtonTitles: nil] show];
                                       }
-#endif
-                                      
-                                      //show the videos
-                                      
                                   }];
 }
 
