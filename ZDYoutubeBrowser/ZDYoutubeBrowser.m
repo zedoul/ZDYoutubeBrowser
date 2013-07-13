@@ -53,7 +53,11 @@
     
     //prepare up the first search
     searchBar.showsCancelButton = NO;
-    [searchBar setBackgroundImage:[UIImage imageNamed:@"Youtube_SearchBar"]];
+    UIImageView* back = [[UIImageView alloc] init];
+    back.backgroundColor = [UIColor colorWithRed:48.0f/255.0f
+                                           green:48.0f/255.0f
+                                            blue:48.0f/255.0f alpha:1.0f];
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"Board_Back"]];
     [searchBar becomeFirstResponder];
 }
 
