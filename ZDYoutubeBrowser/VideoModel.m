@@ -15,6 +15,11 @@
     return [[JSONKeyMapper alloc] initWithDictionary:@{
             @"media$group.media$thumbnail":@"thumbnail",
             @"title.$t": @"title",
+            @"author":@"author",
+            @"gd$rating.numRaters":@"review",
+            @"updated.$t":@"updated",
+            @"media$group.yt$duration":@"seconds",
+            @"yt$statistics.viewCount":@"viewCount",
             }];
 }
 

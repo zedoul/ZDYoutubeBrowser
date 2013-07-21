@@ -16,7 +16,7 @@
 
 #import "PhotoBox.h"
 
-@interface ZDYoutubeBrowser () <UISearchBarDelegate>
+@interface ZDYoutubeBrowser () <UISearchBarDelegate,PhotoBoxDelegate>
 {
     IBOutlet MGScrollView* scroller;
     MGBox* searchBox;
@@ -52,7 +52,12 @@
     searchBox.backgroundColor = [UIColor colorWithWhite:0.5 alpha:1];
     
     //prepare up the first search
-    searchBar.showsCancelButton = YES;
+    searchBar.showsCancelButton = NO;
+    UIImageView* back = [[UIImageView alloc] init];
+    back.backgroundColor = [UIColor colorWithRed:48.0f/255.0f
+                                           green:48.0f/255.0f
+                                            blue:48.0f/255.0f alpha:1.0f];
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"Board_Back"]];
     [searchBar becomeFirstResponder];
 }
 
@@ -64,7 +69,7 @@
 
 -(void)searchYoutubeVideosForTerm:(NSString*)term
 {
-#ifdef ZDYOUTUBEBROWSER
+#ifdef ZDYOUTUBEBROWSER_DEBUG
     NSLog(@"Searching for '%@' ...", term);
 #endif
     
@@ -98,13 +103,16 @@
                                       videos = [VideoModel arrayOfModelsFromDictionaries:
                                                 json[@"feed"][@"entry"]
                                                 ];
-#ifdef ZDYOUTUBEBROWSER
-                                      if (videos) NSLog(@"Loaded successfully models");
-#endif
-                                      
-                                      //show the videos
-                                      [self showVideos];
-                                      
+                                      if (videos) {
+                                          //show the videos
+                                          [self showVideos];
+                                      } else {
+                                          [[[UIAlertView alloc] initWithTitle:@"Error"
+                                                                      message:@"Please try different keywords or try again later"
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"Close"
+                                                            otherButtonTitles: nil] show];
+                                      }
                                   }];
 }
 
@@ -137,19 +145,26 @@
     
     //add boxes for all videos
     for (int i=0;i<videos.count;i++) {
-        
         //get the data
         VideoModel* video = videos[i];
         MediaThumbnail* thumb = video.thumbnail[0];
         
         //create a box
+#ifdef ZDYOUTUBEBROWSER_DEBUG
+        NSLog(@"title [%@]", video.title);
+        NSLog(@"seconds [%@]", video.seconds);
+#endif
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
+        box.delegate = self;
+        box->video = video;
         box.onTap = ^{
-            if([_delegate respondsToSelector:@selector(youtubeBrowser:select:)]) {
-                [_delegate youtubeBrowser:self select:[self youtubeID:video]];
+            if([_delegate respondsToSelector:@selector(youtubeBrowser:select:title:)]) {
+                [_delegate youtubeBrowser:self
+                                   select:[self youtubeID:video]
+                                    title:video.title];
             }
         };
-        [box setFrame:CGRectMake(0, 0, 300, 100)];
+        [box setFrame:CGRectMake(0, 0, 305, 88)];
         
         //add the box
         [scroller.boxes addObject:box];
@@ -157,6 +172,16 @@
     
     //re-layout the scroll view
     [scroller layoutWithSpeed:0.3 completion:nil];
+}
+
+-(IBAction)closeBtnClicked:(id)sender
+{
+    [searchBar resignFirstResponder];
+    searchBar.showsCancelButton =NO;
+    
+    if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
+        [_delegate youtubeBrowserDidClose:self];
+    }
 }
 
 #pragma mark - UISearchDisplayController Delegate Methods
@@ -169,7 +194,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)sBar
 {
-    searchBar.showsCancelButton = YES;
+    searchBar.showsCancelButton = NO;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)sBar
@@ -184,11 +209,15 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)sBar
 {
-    [searchBar resignFirstResponder];
-    searchBar.showsCancelButton =NO;
-    
-    if([_delegate respondsToSelector:@selector(youtubeBrowserDidClose:)]) {
-        [_delegate youtubeBrowserDidClose:self];
+    [self closeBtnClicked:nil];
+}
+
+#pragma mark - 
+
+-(void)photoBox:(PhotoBox*)box down:(VideoModel*)video
+{
+    if([_delegate respondsToSelector:@selector(youtubeBrowser:down:)]) {
+        [_delegate youtubeBrowser:self down:[self youtubeID:video]];
     }
 }
 
