@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C2207C3179BAE61008FF9C0 /* ZDYB_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C2207C2179BAE61008FF9C0 /* ZDYB_back.png */; };
 		7C7532751745C91000CF6E09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7532741745C91000CF6E09 /* UIKit.framework */; };
 		7C7532771745C91000CF6E09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7532761745C91000CF6E09 /* Foundation.framework */; };
 		7C7532791745C91000CF6E09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7532781745C91000CF6E09 /* CoreGraphics.framework */; };
@@ -52,13 +53,10 @@
 		7C7532FF1745C9E400CF6E09 /* VideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7532FB1745C9E400CF6E09 /* VideoModel.m */; };
 		7C7533021745CA0C00CF6E09 /* ZDYoutubeBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */; };
 		7C7533071745CAEA00CF6E09 /* ZDYoutubeBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */; };
-		7CE86C04178BB9CF0045543F /* Title_Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE86C03178BB9CF0045543F /* Title_Back.png */; };
-		7CE86C06178BBA0A0045543F /* Youtube_SearchBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE86C05178BBA0A0045543F /* Youtube_SearchBar.png */; };
-		7CE86C08178BBA340045543F /* PhotoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE86C07178BBA340045543F /* PhotoBox.m */; };
-		7CE86C0A178BBA4C0045543F /* Button_Down.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE86C09178BBA4C0045543F /* Button_Down.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C2207C2179BAE61008FF9C0 /* ZDYB_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZDYB_back.png; sourceTree = "<group>"; };
 		7C7532711745C91000CF6E09 /* ZDYoutubeBrowserApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZDYoutubeBrowserApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C7532741745C91000CF6E09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7C7532761745C91000CF6E09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,10 +141,6 @@
 		7C7533001745CA0C00CF6E09 /* ZDYoutubeBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZDYoutubeBrowser.h; sourceTree = "<group>"; };
 		7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZDYoutubeBrowser.m; sourceTree = "<group>"; };
 		7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZDYoutubeBrowser.xib; sourceTree = "<group>"; };
-		7CE86C03178BB9CF0045543F /* Title_Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title_Back.png; sourceTree = "<group>"; };
-		7CE86C05178BBA0A0045543F /* Youtube_SearchBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Youtube_SearchBar.png; sourceTree = "<group>"; };
-		7CE86C07178BBA340045543F /* PhotoBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBox.m; sourceTree = "<group>"; };
-		7CE86C09178BBA4C0045543F /* Button_Down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button_Down.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,10 +332,7 @@
 		7C7532F31745C9E400CF6E09 /* ZDYoutubeBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				7CE86C09178BBA4C0045543F /* Button_Down.png */,
-				7CE86C07178BBA340045543F /* PhotoBox.m */,
-				7CE86C05178BBA0A0045543F /* Youtube_SearchBar.png */,
-				7CE86C03178BB9CF0045543F /* Title_Back.png */,
+				7C2207C2179BAE61008FF9C0 /* ZDYB_back.png */,
 				7C7533001745CA0C00CF6E09 /* ZDYoutubeBrowser.h */,
 				7C7533011745CA0C00CF6E09 /* ZDYoutubeBrowser.m */,
 				7C7533061745CAE900CF6E09 /* ZDYoutubeBrowser.xib */,
@@ -415,9 +406,7 @@
 				7C75328B1745C91000CF6E09 /* Default-568h@2x.png in Resources */,
 				7C75328E1745C91000CF6E09 /* MainStoryboard.storyboard in Resources */,
 				7C7533071745CAEA00CF6E09 /* ZDYoutubeBrowser.xib in Resources */,
-				7CE86C04178BB9CF0045543F /* Title_Back.png in Resources */,
-				7CE86C06178BBA0A0045543F /* Youtube_SearchBar.png in Resources */,
-				7CE86C0A178BBA4C0045543F /* Button_Down.png in Resources */,
+				7C2207C3179BAE61008FF9C0 /* ZDYB_back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,7 +451,6 @@
 				7C7532FE1745C9E400CF6E09 /* VideoLink.m in Sources */,
 				7C7532FF1745C9E400CF6E09 /* VideoModel.m in Sources */,
 				7C7533021745CA0C00CF6E09 /* ZDYoutubeBrowser.m in Sources */,
-				7CE86C08178BBA340045543F /* PhotoBox.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

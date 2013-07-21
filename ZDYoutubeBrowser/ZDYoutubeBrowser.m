@@ -69,7 +69,7 @@
 
 -(void)searchYoutubeVideosForTerm:(NSString*)term
 {
-#ifdef ZDYOUTUBEBROWSER
+#ifdef ZDYOUTUBEBROWSER_DEBUG
     NSLog(@"Searching for '%@' ...", term);
 #endif
     
@@ -150,8 +150,10 @@
         MediaThumbnail* thumb = video.thumbnail[0];
         
         //create a box
+#ifdef ZDYOUTUBEBROWSER_DEBUG
         NSLog(@"title [%@]", video.title);
         NSLog(@"seconds [%@]", video.seconds);
+#endif
         PhotoBox *box = [PhotoBox photoBoxForURL:thumb.url title:video.title];
         box.delegate = self;
         box->video = video;
